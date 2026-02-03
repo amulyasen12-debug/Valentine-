@@ -29,8 +29,8 @@ cursor:pointer;
 </head>
 <body>
 
-<audio autoplay loop>
-<source src="love.mp3" type="audio/mpeg">
+<audio id="music" loop>
+  <source src="love.mp3" type="audio/mpeg">
 </audio>
 
 <h1>Will you be my Valentine? ❤️</h1>
@@ -42,20 +42,41 @@ cursor:pointer;
 
 <script>
 const messages = [
-"No","Are you sure?","Really sure?","Think again!","Last chance!",
-"You might regret this!","Give it another thought!",
-"Why are you still clicking no?","Just say yes ❤️",
-"Come on… say yes 😭","Don’t break my heart 💔","YES is the right answer 😉"
+  "No",
+  "Are you sure?",
+  "Really sure?",
+  "Think again!",
+  "Last chance!",
+  "You might regret this!",
+  "Give it another thought!",
+  "Why are you still clicking no?",
+  "Just say yes ❤️",
+  "Come on… say yes 😭",
+  "Don’t break my heart 💔",
+  "YES is the right answer 😉"
 ];
 
 let index = 0;
+let started = false;
+const music = document.getElementById("music");
+
+function playMusic() {
+  if (!started) {
+    music.play().catch(() => {});
+    started = true;
+  }
+}
+
 document.getElementById("noBtn").onclick = () => {
-document.getElementById("noBtn").innerText = messages[index];
-index = (index + 1) % messages.length;
+  playMusic();
+  document.getElementById("noBtn").innerText = messages[index];
+  index = (index + 1) % messages.length;
 };
 
 document.getElementById("yesBtn").onclick = () => {
-document.body.innerHTML = "<h1>YAY!! ❤️🥰</h1><p>Best Valentine ever 💕</p>";
+  playMusic();
+  document.body.innerHTML =
+    "<h1>YAY!! ❤️🥰</h1><p>Best Valentine ever 💕</p>";
 };
 </script>
 
